@@ -4,9 +4,8 @@ import math
 
 #library ref source I used: https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.louvain.louvain_communities.html 
 def build_communities(graph): 
-    # Run the louvain community detection algo, use these communites for 
-    # calculating confidence values & optimzing the search 
-    # return a dictionary mapping the nodes to its community, and a disctionary of the communties
+    # Run the louvain community detection algo, use these communites for calculating confidence values
+    # return a dictionary mapping the nodes to its community, and a dictionary of the communties
     communities = nx.community.louvain_communities(graph, weight="strength", seed=30, resolution=0.7)
     lookup_table = {}
 
@@ -56,7 +55,7 @@ def calculate_path_logic(graph, path, partition=None, lambda_decay=0.15, communi
 
         stats = graph[u][v]
         goldstein = stats.get("goldstein", 0.0)
-        #Apply social logic here: ‘the friend of my friend is my friend’ (+ * + = +), 
+        #Apply social logic, ‘the friend of my friend is my friend’ (+ * + = +), 
         #‘the enemy of my enemy is my friend’ (- * - = +), and lastly ‘the enemy of my friend is my enemy’ (- * + =  -)
         sign = 1 if goldstein > 0 else -1 if goldstein < 0 else 0
         if sign != 0:

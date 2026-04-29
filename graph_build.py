@@ -1,6 +1,6 @@
 import json
 from turtle import position
-from zipfile import Path
+from pathlib import Path
 import networkx as nx 
 from collections import defaultdict
 import math
@@ -139,7 +139,7 @@ def draw_graph(G):
     print(f"Saved plot to {Path('network.png').resolve()}")
 
 
-def build_graph(source, exclude_terms, draw=False):
+def build_graph(source, exclude_terms, draw=True):
     # open either the JSON file or a preloaded article list (from benchamrk)
     if isinstance(source, (str, Path)):
         with open(source, "r") as file:
